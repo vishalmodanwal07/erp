@@ -4,9 +4,10 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { BarChart3, Package, ShoppingCart } from 'lucide-react'
+import { useSession } from "next-auth/react"
 
-export default async function Dashboard() {
-  const session = await getServerSession()
+export default function Dashboard() {
+  const { data: session, status } = useSession(); 
   
   if (!session) {
     redirect('/auth/signin?callbackUrl=/dashboard')
